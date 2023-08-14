@@ -1,6 +1,20 @@
+const { Command } = require('commander');
+
 const contactsService = require('./contacts');
 
-const invokerAction = async ({ action, id, name, email, phone }) => {
+const program = new Command();
+program
+  .option('-a, --action <type>', 'choose action')
+  .option('-i, --id <type>', 'user id')
+  .option('-n, --name <type>', 'user name')
+  .option('-e, --email <type>', 'user email')
+  .option('-p, --phone <type>', 'user phone');
+
+program.parse(process.argv);
+
+const argv = program.opts();
+
+const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case 'list':
       const allContacts = await contactsService.listContacts();
@@ -23,12 +37,4 @@ const invokerAction = async ({ action, id, name, email, phone }) => {
   }
 };
 
-//invokerAction({ action: 'list' });
-//invokerAction({ action: 'get', id: 'C9sjBfCo4UJCWjzBnOtxl' });
-// invokerAction({
-//   action: 'create',
-//   name: 'Wednesday Addams',
-//   email: 'Wednesday@addams.com',
-//   phone: '(009) 999-9999',
-// });
-invokerAction({ action: 'remove', id: 'k4WYHCdAICcOsfHKuPQCt' });
+invokeAction(argv);
