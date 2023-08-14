@@ -29,7 +29,6 @@ const removeContact = async contactId => {
   const [result] = contacts.splice(index, 1);
   await updateContacts(contacts);
   return result;
-  // ...твой код. Возвращает объект удаленного контакта. Возвращает null, если объект с таким id не найден.
 };
 
 const addContact = async data => {

@@ -6,11 +6,11 @@ const invokerAction = async ({ action, id, name, email, phone }) => {
       const allContacts = await contactsService.listContacts();
       return console.log(allContacts);
 
-    case 'getById':
+    case 'get':
       const contact = await contactsService.getContactById(id);
       return console.log(contact);
 
-    case 'create':
+    case 'add':
       const newContact = await contactsService.addContact({ name, email, phone });
       return console.log(newContact);
 
@@ -19,12 +19,12 @@ const invokerAction = async ({ action, id, name, email, phone }) => {
       return console.log(removeContact);
 
     default:
-      break;
+      console.warn('\x1B[31m Unknown action type!');
   }
 };
 
 //invokerAction({ action: 'list' });
-//invokerAction({ action: 'getById', id: 'C9sjBfCo4UJCWjzBnOtxl' });
+//invokerAction({ action: 'get', id: 'C9sjBfCo4UJCWjzBnOtxl' });
 // invokerAction({
 //   action: 'create',
 //   name: 'Wednesday Addams',
